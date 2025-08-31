@@ -1,4 +1,4 @@
-package tp1;
+package ar.edu.unq.po2.tp1;
 
 public record EntradaEnCalor() {
 	/*
