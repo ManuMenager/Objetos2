@@ -1,6 +1,10 @@
 package unq;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -49,6 +53,29 @@ public class CounterTestCase {
 	@Test
 	public void testCantidadDeMultiplos() {
 		assertEquals(counter.cantMultiplos(3), 2);
+	}
+	
+	
+	// Ejercicio 2
+	
+	@Test
+	public void testNumeroConMasPares() {
+		ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(156,222,457,-2));
+		assertEquals(counter.numeroConMasPares(numbers), 222);
+	}
+	
+	@Test
+	public void testNumeroConMasParesStream() {
+		ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(156,222,457,-2));
+		assertEquals(counter.numeroConMasParesStream(numbers), 222);
+	}
+	
+	
+	//Ejercicio 3
+	
+	@Test
+	public void elNumeroMultiploMasGrande() {
+		assertEquals(counter.elNumeroMultiploMasGrande(3, 9), 999);
 	}
 	
 }
