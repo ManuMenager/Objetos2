@@ -1,1 +1,12 @@
-/bin/
+/.metadata/
+.classpath
+.project
+.settings/
+bin/
+target/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+*.bak
+*.swp
