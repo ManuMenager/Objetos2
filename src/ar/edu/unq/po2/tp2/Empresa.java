@@ -18,11 +18,15 @@ public class Empresa {
 	}
 	
 	public int montoTotalSueldosNeto() {
-		int total = 0;
-		for (Empleado empleado: empleados) {
-			total += empleado.sueldoNeto();
-		}
-		return total;
+//		int total = 0;
+//		for (Empleado empleado: empleados) {
+//			total += empleado.sueldoNeto();
+//		}
+//		return total;
+		
+		return empleados.stream().mapToInt(Empleado::sueldoNeto).sum();
+		//										  /\
+		//			Es lo mismo poner: empleado -> empleado.sueldoNeto() 
 	}
 	
 	public int montoTotalSueldosBruto() {
