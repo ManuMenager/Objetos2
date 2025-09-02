@@ -7,6 +7,7 @@ public class Expresiones {
 	public static void main(String[] args) {
 		String a = "abc";
 		String s = a;
+		@SuppressWarnings("unused")
 		String t;
 		
 		System.out.println(s.length()); 
