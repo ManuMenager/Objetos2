@@ -8,6 +8,7 @@ public class IngresoPorHorasExtras extends Ingreso{
 		this.cantidadDeHorasExtras = cantidadDeHorasExtras;
 	}
 	
+	@Override
 	public double getMontoImponible() {
 		return 0;
 	}
