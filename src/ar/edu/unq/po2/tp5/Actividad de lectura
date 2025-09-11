@@ -1,0 +1,26 @@
+Actividad de lectura: clases abstractas e interfaces
+
+1. ¿Qué ventajas, en cuanto a polimorfismo, brindan las interfaces en Java?
+Las interfaces permiten que una clase implemente múltiples comportamientos sin importar su posición en la jerarquía de herecia.
+Esto potencia el polimorfismo, ya que una misma referencia de tipo "Interface" puede apuntar a objetos de distintas clases que la implementen.
+Además, una clase puede implementar multiples interfaces lo que también ayuda a que haya más polimorfismo.
+
+2. ¿Por qué no siempre puedo utilizar clases abstractas para agrupar clases polimórficas?
+Porque en Java solo se permite herencia simple de clases, lo que limita el uso de clases abstractas si ya existe un relación de herencia.
+Pero, si se puede implementar multiples interfaces, lo cual ofrece más flexibilidad para lograr polimorfismo.
+
+3. ¿Qué ventajas tienen las clases abstractas sobre las interfaces?
+Una clase abstractas puede definir tanto metodos abstractos como metodos con implementación, mientras que las interfaces solo metodos abstractos.
+También una clase abstracta, permite definir una base más solida cuando varias clases comparten comportamiento, además de la firma de métodos.
+
+4. ¿Se puede instanciar una interface?
+No, una interface solo define contratos (metodos a implementar), pero no provee implementación suficiente para crear objetos.
+
+5. ¿Por qué no es recomendable incrementar o modificar las firmas definidas en un interface?
+Porque todas las clases que implementan la interface se verían obligadas a cambiar, esto podría afectar a frameworks, librerias o incluso
+sistemas completos que dependan de esa interface. 
+
+6. ¿Por qué, en lenguajes como Smalltalk, no es necesaria la implementación de interfaces?
+Porque Smalltalk es un lenguaje dinamicamente tipado, por lo tanto no es necesario declarar una interface, basta con que un objeto implemente
+los métodos esperados. En cambio, Java es un lenguaje estáticamente tipado, por lo que necesita interfaces para garantizar en tiempo de 
+compilación que las clases cumplen con ciertos contratos.
