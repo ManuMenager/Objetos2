@@ -1,6 +1,6 @@
 package ar.edu.unq.po2.tp5.mercado;
 
-public class Producto {
+public class Producto implements Cobrable{
 	int precio;
 	int stock;
 	
@@ -9,6 +9,7 @@ public class Producto {
 		this.stock = stock;
 	}
 	
+	@Override
 	public int getPrecio() {
 		return precio;
 	}
@@ -20,4 +21,5 @@ public class Producto {
 	public void decrementarStock() {
 		stock--;
 	}
+
 }
