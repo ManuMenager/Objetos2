@@ -1,0 +1,15 @@
+2. El programa dado, cuenta con las violaciones a los siguientes principios SOLID:
+	-Interface Segregation: La clase ServidorPop implementa la interface IServidor, pero no utiliza todos los métodos
+						   que están definidos en la interface. Por lo tanto viola el principio, el cual aclara que:
+						   Es mejor tener varias interfaces específicas que una interfaz grande que obliga a los 
+						   clientes a implementar métodos que no usan.
+	-Open-Closed: La clase ClienteEMail, en el metodo enviarCorreo crea el correo ahi mismo, lo que puede provocar que
+				  en el caso de que se desee enviar un correo a otro tipo de Correo, haya que modificar ese metodo
+				  de la clase.
+				  
+3.
+	-Interface Segregation: La interface general IServidor, debe separarse en interfaces más pequeñas para que la clase
+							ServidorPop no se vea obligada a tener que implementar metodos que no utiliza.
+	-Open-Closed: El metodo enviarCorreo de la clase ClienteEMail debe modificarse, y recibir por parámetro directamente
+				  el correo creado y asi evitar futuras modificaciones en el caso de que se creen distintos tipos de 
+				  correos en el futuro.
