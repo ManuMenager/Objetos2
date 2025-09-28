@@ -35,5 +35,4 @@ public class Cliente {
 	public void solicitarDinero(Banco banco, SolicitudCredito solicitud) {
 		banco.registrarSolicitud(solicitud);
 	}
-
 }

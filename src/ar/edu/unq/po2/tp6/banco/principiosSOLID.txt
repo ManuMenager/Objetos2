@@ -1,0 +1,7 @@
+Mi modelo cumple con los principios SOLID porque tome los siguientes recaudos para no violar ningún principio:
+- Todas las clases en mi modelo se encargan de una única responsabilidad, por lo que no se viola el principio de Single responsability.
+- No fué necesario utilizar interfaces por lo que no se viola el principio de Interface Segregation.
+- Utilicé subclases para modelar situaciones en las que se debe poder intercambiar cualquier objeto de la misma clase sin
+  problemas, como es el caso de las solicitudes de crédito. Por lo que no se viola el principio de Liskow subtitution.
+- Modele las clases de tal forma para evitar que haya que realizar cambios en el código de las mismas, y se pueda realizar una extensión
+  frente a la necesidad de una modificación.

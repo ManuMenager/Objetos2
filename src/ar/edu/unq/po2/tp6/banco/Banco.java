@@ -6,6 +6,11 @@ public class Banco {
 	private ArrayList<Cliente> clientes;
 	private ArrayList<SolicitudCredito> solicitudes;
 	
+	public Banco(ArrayList<Cliente> clientes, ArrayList<SolicitudCredito> solicitudes) {
+		this.clientes = clientes;
+		this.solicitudes = solicitudes;
+	}
+	
 	public void agregarCliente(Cliente cliente) {
 		clientes.add(cliente);
 	}
@@ -24,5 +29,9 @@ public class Banco {
 	
 	public int montoTotalAPagar() {
 		return solicitudes.stream().filter(SolicitudCredito::esAceptable).mapToInt(SolicitudCredito::getMontoSolicitado).sum();
+	}
+
+	public int getClientes() {
+		return clientes.size();
 	}
 }
