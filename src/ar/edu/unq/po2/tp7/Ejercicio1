@@ -1,0 +1,23 @@
+Ejercicio 1.
+
+1. 
+El patrón Composite permite que el cliente trate de manera uniforme a objetos individuales y compuestos mediante una clase abstracta común 
+que define la interfaz tanto para objetos simples (hojas) como para los objetos compuestos.
+ - Esa clase declara operaciones generales (por ejemplo, Dibujar, Operación, etc.) que todas las subclases implementan.
+ - Los objetos hoja implementan las operaciones directamente.
+ - Los objetos compuestos implementan las mismas operaciones, pero además gestionan una colección de hijos y delegan en ellos cuando corresponde.
+De esta forma, el cliente puede llamar a los mismos métodos sin preocuparse si está interactuando con un objeto simple o un contenedor.
+
+2.
+Según el libro, conviene aplicarlo cuando :
+ - Queremos representar jerarquías parte-todo, como estructuras de árbol (documentos compuestos por secciones, gráficos compuestos por figuras, componentes de hardware en un sistema, etc.).
+ - Deseamos que los clientes ignoren la diferencia entre un objeto individual y una composición, tratándolos con la misma interfaz.
+ - Cuando necesitamos construcciones recursivas, es decir, un objeto compuesto puede contener otros compuestos y hojas de forma indefinida.
+Ejemplos típicos: editores gráficos (formas y grupos de formas), interfaces gráficas (ventanas con subventanas), sistemas de archivos (archivos y carpetas).
+
+3.
+Los elementos fundamentales de la programación orientada a objetos que permiten que los clientes no distingan entre hoja o compuesto son:
+ - Herencia: tanto las hojas como los compuestos heredan de la misma clase abstracta o implementan la misma interfaz.
+ - Polimorfismo: el cliente llama a los métodos definidos en la interfaz común, y en tiempo de ejecución se ejecuta la implementación apropiada (de hoja o de compuesto).
+ - Encapsulamiento: los detalles de si un objeto tiene o no hijos quedan ocultos dentro de la implementación, el cliente no necesita conocerlos.
+Gracias a estos tres principios, el cliente puede usar todos los objetos de manera uniforme sin tener que preguntar por su tipo concreto.
