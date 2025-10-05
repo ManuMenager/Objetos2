@@ -2,19 +2,19 @@ package ar.edu.unq.po2.tp7.poquer;
 
 public class PokerStatus {
 	
-	public boolean verificar(String c1, String c2, String c3, String c4, String c5) {
-		String[] valores = {	
-			c1.substring(0, c1.length() - 1),
-			c2.substring(0, c2.length() - 1),
-			c3.substring(0, c3.length() - 1),
-			c4.substring(0, c4.length() - 1),
-			c5.substring(0, c5.length() - 1)
+	public boolean verificar(Carta carta1, Carta carta2, Carta carta3, Carta carta4, Carta carta5) {
+		int[] valores = {	
+				carta1.getValor(),
+				carta2.getValor(),
+				carta3.getValor(),
+				carta4.getValor(),
+				carta5.getValor(),
 		};
 		
-		for (String valor : valores) {
+		for (int valor : valores) {
 			int iguales = 0;
-			for (String actual : valores) {
-				if (valor.equals(actual)) {
+			for (int actual : valores) {
+				if (valor == actual) {
 					iguales++;
 				}
 			}

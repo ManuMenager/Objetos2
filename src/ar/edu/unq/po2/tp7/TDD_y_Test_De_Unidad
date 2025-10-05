@@ -1,0 +1,25 @@
+1. Mantener en forma exhaustiva una suite de tests
+
+Esto significa que, a medida que se desarrolla el sistema, se deben ir agregando y manteniendo todos los tests necesarios que aseguren la calidad del código.
+ - Cada nueva funcionalidad debe ir acompañada de su test correspondiente.
+ - Cuando un bug es detectado, se debe crear un test que lo reproduzca y luego corregirlo.
+ - La suite debe ser ejecutable en cualquier momento y garantizar que no se rompe nada al hacer cambios (regresión).
+En resumen: una suite de tests completa y bien mantenida se convierte en una red de seguridad que da confianza para refactorizar y evolucionar el código 
+sin miedo a introducir errores.
+
+
+2. No deben utilizarse para testear otros objetos del dominio
+
+Un test unitario debe enfocarse en una única unidad de código (por ejemplo, un método o clase).
+ - No es correcto que un test de una clase dependa del funcionamiento interno de otra clase o servicio.
+ - Esto evita acoplamiento entre los tests y asegura que, si un test falla, sea claro en qué parte del código está el error.
+ - Si el test depende de varios objetos externos, deja de ser un test de unidad y pasa a ser un test de integración.
+En pocas palabras: cada test unitario debe estar limitado a la unidad que prueba, utilizando dobles de prueba (mocks, stubs, fakes) si es necesario para aislar la lógica.
+
+
+3. Comunicar la intención del test
+
+Un test unitario no solo debe verificar que el código funciona, sino también ser comprensible para otros desarrolladores.
+ - El nombre del test y su estructura deben dejar claro qué se está probando y qué se espera como resultado.
+ - Esto convierte al conjunto de tests en documentación viva del sistema, que explica su comportamiento esperado.
+ - Tests bien redactados permiten entender rápidamente la intención del código, incluso sin leer la implementación.
