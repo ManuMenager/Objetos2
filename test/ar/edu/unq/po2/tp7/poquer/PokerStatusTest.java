@@ -42,15 +42,15 @@ public class PokerStatusTest {
 		dosDeCorazones = mock(Carta.class);
 		seisDeCorazones = mock(Carta.class);
 		
-		when(cuatroDeCorazones.getValor()).thenReturn(4);
-		when(doceDePicas.getValor()).thenReturn(12);
-		when(diezDeCorazones.getValor()).thenReturn(10);
-		when(diezDePicas.getValor()).thenReturn(10);
-		when(diezDeDiamante.getValor()).thenReturn(10);
-		when(diezDeTrebol.getValor()).thenReturn(10);
-		when(azDeCorazones.getValor()).thenReturn(1);
-		when(dosDeCorazones.getValor()).thenReturn(2);
-		when(seisDeCorazones.getValor()).thenReturn(6);
+		when(cuatroDeCorazones.getValor()).thenReturn(Valor.CUATRO);
+		when(doceDePicas.getValor()).thenReturn(Valor.Q);
+		when(diezDeCorazones.getValor()).thenReturn(Valor.DIEZ);
+		when(diezDePicas.getValor()).thenReturn(Valor.DIEZ);
+		when(diezDeDiamante.getValor()).thenReturn(Valor.DIEZ);
+		when(diezDeTrebol.getValor()).thenReturn(Valor.DIEZ);
+		when(azDeCorazones.getValor()).thenReturn(Valor.A);
+		when(dosDeCorazones.getValor()).thenReturn(Valor.DOS);
+		when(seisDeCorazones.getValor()).thenReturn(Valor.SEIS);
 		
 		when(cuatroDeCorazones.getPalo()).thenReturn("Corazones");
 		when(doceDePicas.getPalo()).thenReturn("Picas");

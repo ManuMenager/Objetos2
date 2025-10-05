@@ -30,6 +30,7 @@ public class JugadasPokerTest {
 	
 	@BeforeEach
 	public void setUp() {
+		// Setup
 		cuatroDeCorazones = mock(Carta.class);
 		diezDeCorazones = mock(Carta.class);
 		diezDePicas = mock(Carta.class);
@@ -74,4 +75,6 @@ public class JugadasPokerTest {
 		assertFalse(pokerAPoker2);
 		assertFalse(trioAColor);
 	}
+	
+	// 3. Test Doubles : Carta -> Stub (Ya que solo devuelve valores pero no realiza la función de verificar nada).
 }
