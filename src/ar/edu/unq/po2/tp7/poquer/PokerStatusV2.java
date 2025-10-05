@@ -10,7 +10,7 @@ public class PokerStatusV2 {
 	}
 	
 	public boolean esPoquer(Carta c1, Carta c2, Carta c3, Carta c4, Carta c5) {
-		int[] valores = {	
+		Valor[] valores = {	
 				c1.getValor(),
 				c2.getValor(),
 				c3.getValor(),
@@ -18,9 +18,9 @@ public class PokerStatusV2 {
 				c5.getValor()
 			};
 			
-			for (int valor : valores) {
+			for (Valor valor : valores) {
 				int iguales = 0;
-				for (int actual : valores) {
+				for (Valor actual : valores) {
 					if (valor == actual) {
 						iguales++;
 					}
@@ -33,7 +33,7 @@ public class PokerStatusV2 {
 	}
 	
 	public boolean esTrio(Carta c1, Carta c2, Carta c3, Carta c4, Carta c5) {
-		int[] valores = {	
+		Valor[] valores = {	
 				c1.getValor(),
 				c2.getValor(),
 				c3.getValor(),
@@ -41,9 +41,9 @@ public class PokerStatusV2 {
 				c5.getValor()
 			};
 			
-			for (int valor : valores) {
+			for (Valor valor : valores) {
 				int iguales = 0;
-				for (int actual : valores) {
+				for (Valor actual : valores) {
 					if (valor == actual) {
 						iguales++;
 					}

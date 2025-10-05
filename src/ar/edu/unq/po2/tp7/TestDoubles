@@ -1,0 +1,77 @@
+1) ¿Qué son los test doubles?
+
+Los Test Doubles son objetos falsos creados para ser utilizados al realizar un test unitario. Un Test Double se define como la acción de realizar una prueba unitaria en la cual cualquier conocimiento o dependencia que se 
+encuentre fuera del SUT (System Under Test) es reemplazado por un objeto falso.
+La utilización de Test Doubles colabora con la clase que está siendo testeada, permitiendo aislar el comportamiento de dicha clase. Esto significa que si hay un cambio en el código de una clase colaboradora, 
+no afectará los tests de la clase principal, manteniendo la independencia de los tests unitarios.
+
+2) Tipos de test doubles.
+
+Dummy.
+	Los Dummies son los objetos más simples o "tontos". Se utilizan para rellenar listas de parámetros o pasar como argumentos, pero nunca se utilizan realmente dentro de la lógica del test. 
+	No se les asigna ninguna responsabilidad ni comportamiento.
+	Un objeto creado con Mockito será conceptualmente un Dummy si solo se instancia y se pasa como parámetro, pero no se le da ningún comportamiento.
+	
+	Ejemplo:
+		Moneda moneda = mock(IMoneda.class); // Solo para rellenar, no se usa.
+	
+	
+Stub.
+	Un Stub es un Test Double al que se le da la responsabilidad de devolver una respuesta controlada o pre-programada. El objeto falso recibe el mensaje y devuelve un valor específico que el desarrollador 
+	controla para poder reproducir un caso puntual.
+	Para asignar un valor de respuesta a un Test Double y convertirlo en un Stub, se utiliza la sintaxis when().thenReturn().
+	
+	Ejemplo:
+		when(moneda.esCara()).thenReturn(true);
+		
+	Valores secuenciales:
+		when(moneda.esCara()).thenReturn(true, false); // La primera vez devuelve true y la segunda vez devuelve false.
+		
+	Lanzar excepciones:
+		when(moneda.esCara()).thenThrow(throwableClasses);
+		
+		
+Mock.
+	Un Mock es un Stub con la capacidad de poder verificarse. Además de devolver valores determinados, un Mock provee una batería de verificaciones que permiten chequear si se le mandó un mensaje (llamada a un método) 
+	y con qué parámetros durante la ejecución del test.
+	La verificación se realiza usando el método verify() de Mockito. Esta verificación actúa como un assert (si el método no fue llamado o no se llamó correctamente, el test fallará).
+	
+	Ejemplo:
+		verify(unGuerrero).descontarPuntosDeVida(50); // Verifica que unGuerrero recibió el mensaje descontarPuntosDeVida(50).
+		
+		times:
+		verify(unGuerrero, times(3)).descontarPuntosDeVida(50); // Verifica que el método se llamó un número específico de veces (en este caso 3 veces).
+		
+		atLeast(int) / atLeastOne:
+		verify(unGuerrero, atLeast(3).descontarPuntosDeVida(50); // Verifica que el método se llamó al menos un número de veces (en este caso al menos 3 veces).
+		
+		never:
+		verify(unGuerrero, never()).descontarPuntosDeVida(50) // Verifica que el método nunca fue llamado.
+		
+		verifyNoMoreInteractions(unGuerrero) // Verifica que unGuerrero no tenga más interacciones.
+		
+		verifyZeroInteractions(mock) // Verifica que unGuerrero no tuvo interacciones.
+		
+	
+Spy.
+	Un Spy (Espía) es un Test Double que envuelve a un objeto real. Es similar a un Mock en que puede configurarse para devolver algunos valores específicos y puede verificarse, pero la diferencia principal es que llama 
+	realmente a los métodos del objeto real. Se utiliza a menudo para envolver clases del framework o colecciones (como un ArrayList) cuando se quiere ver qué pasa dentro de ellas.
+	
+	Ejemplo:
+		List<Receta> spyListaDeRecetas = spy(new ArrayList<Receta>());	
+		SistemaDeRecetas sistemaR = new SistemaDeRecetas(spyListaDeRecetas);
+				
+		sistemaR.publicar(dummyReceta);
+		sistemaR.publicar(recetaAptaCeliaco);
+		
+		// Con el spy verifico que se le mando correctamente el mensaje add a la collecion dentro del mensaje publicar.
+		assertEquals(sistemaR.cantidadDeRecetasPublicadas(), 2, 0);
+		
+		// Ademas se verifica que el envio de mensajes se haga en orden esperado.	 
+		InOrder orden = inOrder(spyListaDeRecetas);			
+		orden.verify(spyListaDeRecetas).add(dummyReceta);
+		orden.verify(spyListaDeRecetas).add(recetaAptaCeliaco);
+				
+		// Verifico con el spy que se le mando el mensaje size a la colleccion para obtener la cantidad de recetas publicadas.
+		verify(spyListaDeRecetas).size();
+		
