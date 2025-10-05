@@ -1,0 +1,56 @@
+2. Para indicar que un objecto mock debe recibir una secuencia de mensajes particular en un orden preestablecido se debe utilizar InOrder:
+	Ejemplo:
+		import org.mockito.InOrder;
+
+		@Test
+		void testOrdenDeLlamadas() {
+    		List<String> lista = mock(List.class);
+
+   			lista.add("uno");
+    		lista.add("dos");
+
+    		InOrder inOrder = inOrder(lista);
+    		inOrder.verify(lista).add("uno");
+    		inOrder.verify(lista).add("dos");
+		}
+
+3. Para que un objeto mock esté preparado para recibir algunos mensajes sin importar el orden o la obligatoriedad de recibirlos se debe utilizar verify:
+	Ejemplo:
+		@Test
+		void testVerificarSinOrden() {
+    		List<String> lista = mock(List.class);
+
+   		 	lista.add("primero");
+    		lista.add("segundo");
+
+    		verify(lista).add("segundo"); // pasa aunque no haya sido la primera llamada
+    		verify(lista).add("primero");
+		}
+
+4. Sí, se puede hacer stubbing encadenado para anidar el envío de mensajes (cuando el mismo método devuelve distintos valores en distintas llamadas):
+	Ejemplo: En este ejemplo la primer llamada al metodo devuelve "Hola" y la segunda llamada al mismo metodo devuelve "Mundo".
+	
+		void testRespuestasEncadenadas() {
+    		Iterator<String> mockIterator = mock(Iterator.class);
+    		when(mockIterator.next()).thenReturn("Hola").thenReturn("Mundo");
+
+    		assertEquals("Hola", mockIterator.next());
+    		assertEquals("Mundo", mockIterator.next());
+		}
+
+5. La forma de verificación con mockito es con verify, verifyZeroIteractions o verifyNoMoreInteractions:
+		Ejemplo:
+		
+			@Test
+			void testVerificacion() {
+    			List<String> lista = mock(List.class);
+    			List<String> lista2 = mock(List.class);
+
+    			lista.add("uno");
+    			lista.clear();
+
+    			verify(lista).add("uno");     // verificamos que se llamó
+    			verify(lista).clear();        // también
+    			verifyNoMoreInteractions(lista); // asegura que no hubo más llamadas
+    			verifyZeroIteractions(lista2); // asegura que nunca se llamó
+}

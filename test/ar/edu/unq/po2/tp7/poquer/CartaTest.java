@@ -14,14 +14,14 @@ public class CartaTest {
 	Carta diezDeCorazones;
 	
 	@BeforeEach
-	public void SetUp() {
-		cuatroDeCorazones = new Carta(4, "Corazones");
-		doceDePicas = new Carta(12, "Picas");
-		diezDeCorazones = new Carta(10, "Corazones");
+	public void setUp() {
+		cuatroDeCorazones = new Carta(Valor.CUATRO, "Corazones");
+		doceDePicas = new Carta(Valor.Q, "Picas");
+		diezDeCorazones = new Carta(Valor.DIEZ, "Corazones");
 	}
 	
 	@Test
-	public void ComparacionDeCartasTest() {
+	public void comparacionDeCartasTest() {
 		// Exercise
 		boolean menor = cuatroDeCorazones.esMayorQue(doceDePicas);
 		boolean mayor = doceDePicas.esMayorQue(cuatroDeCorazones);

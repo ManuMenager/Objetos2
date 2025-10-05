@@ -64,7 +64,7 @@ public class PokerStatusTest {
 	}
 
 	@Test
-	public void testPokerStatusV1() {
+	public void pokerStatusV1Test() {
 		// Exercise
 		boolean poker = pokerStatus.verificar(diezDeCorazones, diezDePicas, diezDeDiamante, diezDeTrebol, cuatroDeCorazones);
 		boolean nada = pokerStatus.verificar(diezDeDiamante, dosDeCorazones, azDeCorazones, doceDePicas, diezDeTrebol);
@@ -75,7 +75,7 @@ public class PokerStatusTest {
 	}
 	
 	@Test
-	public void testPokerStatusV2() {
+	public void pokerStatusV2Test() {
 		// Exercise
 		String poker = pokerStatusV2.verificar(diezDeCorazones, diezDePicas, diezDeDiamante, diezDeTrebol, cuatroDeCorazones);
 		String trio = pokerStatusV2.verificar(diezDeCorazones, diezDePicas, diezDeDiamante, doceDePicas, cuatroDeCorazones);
