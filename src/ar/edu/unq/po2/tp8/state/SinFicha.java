@@ -5,7 +5,7 @@ public class SinFicha extends EstadoMaquina {
 	
 	@Override
 	public String iniciar() {
-		return ("Ingrese una ficha");
+		return ("Ingrese al menos una ficha");
 	}
 
 }

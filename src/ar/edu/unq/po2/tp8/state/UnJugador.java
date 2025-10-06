@@ -5,7 +5,7 @@ public class UnJugador extends EstadoMaquina {
 	
 	@Override
 	public String iniciar() {
-		return ("Un jugador jugando");
+		return ("Modo: Un Jugador");
 	}
 
 }

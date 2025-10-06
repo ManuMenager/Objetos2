@@ -5,7 +5,7 @@ public class DosJugadores extends EstadoMaquina {
 	
 	@Override
 	public String iniciar() {
-		return ("Dos jugadores jugando");
+		return ("Modo: Dos Jugadores");
 	}
 
 }
