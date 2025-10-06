@@ -1,3 +1,27 @@
 1.
 El impacto que genera se compartan instancias de parcelas entre composiciones es que, como el patrón Composite generalmente modela estructuras de árbol, si se permite
 a los componentes almacenar múltiples padres puede generar ambigüedades cuando se propaga una petición hacia arriba en la estructura.
+
+
+4.
+La discusión sobre la implementación de operaciones de gestión de hijos (como Añadir y Eliminar) es un dilema central en el patrón Composite, ya que enfrenta la transparencia con la seguridad.
+Opciones de Diseño:
+	1. Declarar en la Interfaz Componente (PorcionTierra):
+	    ◦ Propósito: Se declara Añadir y Eliminar en la clase abstracta Componente.
+	    ◦ Ventaja: Logra la Transparencia. El cliente (el sistema) puede tratar a todos los objetos de la jerarquía (CultivoSoja, CultivoTrigo o ParcelaMixta) de manera uniforme. El cliente no necesita saber si interactúa con un objeto Hoja o una Composición.
+	    ◦ Inconveniente: Sacrifica la Seguridad. Los clientes pueden intentar llamar a Añadir o Eliminar en un objeto Hoja (CultivoSoja o CultivoTrigo), lo cual no tiene sentido, violando implícitamente el Principio de Segregación de Interfaces (ISP).
+	2. Declarar solo en el Compuesto (ParcelaMixta):
+	    ◦ Propósito: Los métodos de gestión de hijos se definen y se limitan únicamente a la clase Compuesto.
+	    ◦ Ventaja: Proporciona Seguridad, ya que previene errores de ejecución al intentar llamar estas operaciones en Hojas.
+	    ◦ Inconveniente: Sacrifica la Transparencia. Esto obliga al cliente a tener que realizar comprobaciones de tipo inseguras para determinar si un componente es realmente un Compuesto antes de intentar
+						 manipular sus hijos, haciendo que los componentes no se traten de manera uniforme.
+
+MANEJO DEL DILEMA:
+El patrón Composite, tal como se presenta en la documentación, a menudo opta por la transparencia sobre la seguridad. Para mitigar la falta de seguridad sin perder la uniformidad, se sugiere añadir una operación de consulta, como ObtenerCompuesto(), 
+en la clase Componente. La clase Compuesto devuelve this, y la clase Hoja devuelve null. Esto permite al cliente preguntar al componente si es un Compuesto antes de ejecutar Añadir o Eliminar de forma segura.
+
+
+5.
+PorcionTierra -> Componente
+CultivoSoja, CultivoTrigo -> Hoja
+ParcelaMixta -> Compuesto
