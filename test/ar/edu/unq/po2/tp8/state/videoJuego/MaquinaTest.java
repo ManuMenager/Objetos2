@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tp8.state;
+package ar.edu.unq.po2.tp8.state.videoJuego;
 
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
@@ -6,6 +6,9 @@ import static org.mockito.Mockito.spy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
+
+import ar.edu.unq.po2.tp8.state.videoJuego.Maquina;
+import ar.edu.unq.po2.tp8.state.videoJuego.Pantalla;
 
 public class MaquinaTest {
 	Maquina maquina;
