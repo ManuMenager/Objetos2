@@ -1,0 +1,34 @@
+2-
+a. ¿Dónde se define el esqueleto del algoritmo?
+	El esqueleto del algoritmo se define en una operación llamada método plantilla (Template Method). Este método plantilla se implementa en la clase abstracta del patrón.
+
+b. ¿Se puede redefinir el esqueleto?
+	No, la función principal del método plantilla es fijar el ordenamiento de los pasos del algoritmo, definiendo su esqueleto. El patrón permite que las subclases redefinan ciertos pasos del algoritmo sin cambiar su estructura.
+
+c. ¿Qué es lo que se puede redefinir?
+	Lo que se puede redefinir son los pasos específicos del algoritmo que varían entre implementaciones. El método plantilla llama a varios tipos de operaciones, y las subclases redefinen las que proporcionan el comportamiento variable:
+		. Operaciones primitivas (abstractas): Operaciones que la clase abstracta define, pero que las subclases deben redefinir obligatoriamente para completar el algoritmo.
+		. Operaciones de enganche (hook methods): Operaciones que las subclases pueden modificar si es necesario para ampliar el comportamiento. Estas suelen proporcionar un comportamiento predeterminado que a menudo es "no hacer nada".
+
+d. ¿Qué es un hook method?
+		Un hook method (método de enganche u operación de enganche) es una operación que proporciona un comportamiento predeterminado que puede ser modificado por las subclases si es necesario.
+		Una operación de enganche normalmente no hace nada por omisión. Los métodos plantilla pueden llamar a estas operaciones en puntos específicos, permitiendo extensiones solo en esos puntos.
+		
+3-
+	1. Manejo de documentos (Aplicación y documento).
+	2. Manejo de visualización (Vista).
+	
+4-
+	Manejo de documentos (Aplicación y documento).
+	a. Clase Abstracta: Aplicación -> Es la clase que define el algoritmo general para abrir un documento.
+	b. Template Method: AbrirDocumento -> Define el esqueleto del algoritmo: Comprueba si se puede abrir, crea el documento, lo añade y lo lee.
+	c. Clases concretas: Subclases de Aplicación y Subclases de documento -> Proporcionan las implementaciones específicas para el tipo de aplicación y documento, respectivamente.
+	d. Métodos a redefinir: SePuedeAbrirDocumento, CrearDocumento, Leer -> Estas operaciones deber ser implementadas por las subclases para completar el algoritmo.
+	e. Hook Methods: APuntoDeAbrirDocumento -> Permite a las subclases de Aplicación ejecutar código es un punto específico antes de que se abra el documento.
+	
+	Manejo de visualización (Vista).
+	a. Clase Abstracta: Vista -> Define el protocolo para mostrar la vista y gestionar el estado del dibujo.
+	b. Template Method: Mostrar -> Define el esqueleto: Llama a AsignarFoco, HacerMostrar y QuitarFoco.
+	c. Clases concretas: MiVista -> Subclase de Vista que implementa el dibujo real.
+	d. Metodos a redefinir: HacerMostrar -> Es el método que realiza el dibujado real. En la clase Vista, HacerMostrar por defecto no hace nada, pero la subclase MiVista lo redefine para mostrar sus contenidos.
+	e. Hook Methods: HacerMostrar -> Aunque es una operación primitiva esencial en este contexto, actúa como un enganche donde la subclase inyecta su comportamiento de dibujado específico. También se mencionan operaciones concretas como AsignarFoco y QuitarFoco que conservan el invariante (estado del dibujo), pero estas son operaciones concretas, no hooks que provean comportamiento por defecto redefinible, aunque controlan la extensión.
