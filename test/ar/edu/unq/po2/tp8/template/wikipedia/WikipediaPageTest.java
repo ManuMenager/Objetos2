@@ -6,7 +6,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +44,7 @@ class WikipediaPageTest {
 	@Test
 	void mismaLetraInicialTest() {
 		List<WikipediaPage> lista = new ArrayList<>(Arrays.asList(quilmes, buenosAires));
-		List<WikipediaPage> r = MismaLetraInicial.getSimilarPages(bernal, lista);
+		List<WikipediaPage> r = mismaLetraInicial.getSimilarPages(bernal, lista);
 		assertTrue(r.contains(buenosAires));
 		assertFalse(r.contains(quilmes));
 	}
@@ -54,23 +56,24 @@ class WikipediaPageTest {
 		when(quilmes.getLinks()).thenReturn(new ArrayList<>(Arrays.asList(bernal, solano, ezpeleta)));
 		
 		List<WikipediaPage> lista = new ArrayList<>(Arrays.asList(bernal, buenosAires));
-		List<WikipediaPage> r = LinkEnComun.getSimilarPages(quilmes, lista);
+		List<WikipediaPage> r = linkEnComun.getSimilarPages(quilmes, lista);
 		assertTrue(r.contains(buenosAires));
 		assertFalse(r.contains(bernal));
 	}
 	
 	@Test
 	void propiedadEnComunTest() {
-		when(bernal.getInfobox()).thenReturn();
-		when(buenosAires.getInfobox()).thenReturn();
-		when(quilmes.getInfobox()).thenReturn();
-		when(solano.getInfobox()).thenReturn();
-		when(ezpeleta.getInfobox()).thenReturn();
+		when(bernal.getInfobox()).thenReturn(new HashMap<>());
+	    when(buenosAires.getInfobox()).thenReturn(new HashMap<>());
+		
+		when(quilmes.getInfobox()).thenReturn(Map.of("birth_place", bernal));
+	    when(solano.getInfobox()).thenReturn(Map.of("birth_place", buenosAires));
+	    when(ezpeleta.getInfobox()).thenReturn(Map.of("birth_place", quilmes));
 		
 		List<WikipediaPage> lista = new ArrayList<>(Arrays.asList(bernal, buenosAires, solano, quilmes));
-		List<WikipediaPage> r = PropiedadEnComun.getSimilarPages(ezpeleta, lista);
-		assertTrue(r.containsAll(solano, quilmes));
-		assertFalse(r.containsAll(bernal, buenosAires));
+		List<WikipediaPage> r = propiedadEnComun.getSimilarPages(ezpeleta, lista);
+		assertTrue(r.containsAll(Arrays.asList(solano, quilmes)));
+		assertFalse(r.containsAll(Arrays.asList(bernal, buenosAires)));
 	}
 
 }
