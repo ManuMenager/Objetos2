@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tp8.template.wikipedia;
+package ar.edu.unq.po2.tp9.template.wikipedia;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -12,6 +12,12 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import ar.edu.unq.po2.tp9.template.wikipedia.FiltroWikipedia;
+import ar.edu.unq.po2.tp9.template.wikipedia.LinkEnComun;
+import ar.edu.unq.po2.tp9.template.wikipedia.MismaLetraInicial;
+import ar.edu.unq.po2.tp9.template.wikipedia.PropiedadEnComun;
+import ar.edu.unq.po2.tp9.template.wikipedia.WikipediaPage;
 
 class WikipediaPageTest {
 	WikipediaPage buenosAires;

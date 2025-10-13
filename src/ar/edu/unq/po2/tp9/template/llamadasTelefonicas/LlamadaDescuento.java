@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tp8.template.llamadasTelefonicas;
+package ar.edu.unq.po2.tp9.template.llamadasTelefonicas;
 
 public class LlamadaDescuento extends LlamadaTelefonica{
 	

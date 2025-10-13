@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tp8.template.wikipedia;
+package ar.edu.unq.po2.tp9.template.wikipedia;
 
 import java.util.List;
 import java.util.Set;

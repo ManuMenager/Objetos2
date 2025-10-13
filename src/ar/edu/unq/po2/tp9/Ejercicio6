@@ -1,0 +1,142 @@
+1. Tipos de Adaptadores
+	Existen dos tipos principales de implementaciones del patrón Adapter.
+		Adaptador de Clases (Class Adapter):
+    		◦ El Adaptador hereda la interfaz del Objetivo (Target) y, simultáneamente, hereda la implementación del Adaptable (Adaptee).
+    		◦ Este tipo de adaptador adapta la interfaz del Adaptable a la del Objetivo, permitiendo que el Adaptador sea un subtipo del Objetivo, pero no del Adaptable.
+    		◦ Permite al Adaptador redefinir una parte del comportamiento del Adaptable, ya que el Adaptador es una subclase del Adaptable.
+	
+		Adaptador de Objetos (Object Adapter):
+    		◦ El Adaptador implementa la interfaz del Objetivo (Target) y compone una instancia del Adaptable (Adaptee).
+    		◦ El Adaptador implementa la funcionalidad del Objetivo en términos de la interfaz del Adaptable, al que tiene como referencia.
+    		
+2. Diferencias entre adaptadores
+	Las diferencias claves radican en cómo logran la adaptación y sus consecuencias en la flexibilidad:
+	Relación con Adaptable:
+		Class Adapter: Hereda públicamente del Objetivo y privadamente del Adaptable (en C++).
+		Object Adapter: Compone (contiene una referencia a) el Adaptable.
+	
+	Herencia del Adaptable:
+		Class Adapter: Permite redefinir el comportamiento del Adaptable, ya que es su subclase.
+		Object Adapter: Hace más difícil redefinir el comportamiento del Adaptable (requiere crear una subclase del Adaptable y hacer que el Adaptador se refiera a ella).
+	
+	Flexibilidad de uso:
+		Class Adapter: Funciona solo con el Adaptable en concreto (debido a que se hereda de él).
+		Object Adapter: Un mismo Adaptador puede funcionar con el Adaptable y todas sus subclases, lo que permite reutilizar el adaptador con muchos Adaptables.
+		
+	Implementación: 
+		Class Adapter: Requiere herencia múltiple o mecanismos equivalentes.
+		Object Adapter: Se basa en la composición de objetos, lo cual es viable en la mayoría de los lenguajes OO.
+
+3. ¿Se pueden utilizar ambas alternativas de implementación del patrón en java?
+	En Java no se pueden usar ambas alternativas de la misma forma porque en Java no existe herencia múltiple de clases, Lo único que podés hacer es heredar de la clase adaptada, e implementar la interfaz objetivo.
+    Pero esto limita mucho porque el adaptador queda rígidamente acoplado a esa clase concreta (y no podés heredar de otra clase más). Por lo tanto no es tan eficiente utilizar un Class Adapter.
+    En cambio, si se puede implementar un Object Class sin problemas, ya que el adaptador implementa la interfaz objetivo y tiene una referencia al objeto adaptado y eso se puede implementar en Java.
+	
+4. Ver la interface Enumeration de java y la clase Vector, preste atención a que dicha clase contiene un método "elements()". 
+   Explique cómo funciona el patrón adapter y cuáles son los roles de los participantes entre la interface y clase mencionada. 
+   Mencione qué tipo de implementación del patrón se utiliza.
+
+En este escenario, el patrón Adaptador se utiliza para proporcionar una interfaz de recorrido (Enumeration) para la estructura de datos interna de Vector, permitiendo a los clientes usar una interfaz preexistente (legacy).
+
+Roles de los participantes:
+	• Objetivo (Target): La interfaz que el cliente espera para recorrer la colección: Enumeration.
+	• Adaptable (Adaptee): La clase que tiene la funcionalidad que debe ser adaptada, en este caso, la estructura de datos interna de Vector. El Adaptador se implementará en términos de esta estructura.
+	• Adaptador (Adapter): El objeto que implementa la interfaz Enumeration y es devuelto por el método elements(). Este objeto traduce las peticiones de la interfaz Enumeration a las operaciones internas del Vector.
+	• Cliente: El código que utiliza la interfaz Enumeration (por ejemplo, llamando a hasMoreElements() y nextElement()).
+
+Funcionamiento del patrón Adaptador:
+	La clase Vector expone su contenido a través del método elements(), el cual devuelve un objeto que implementa la interfaz Enumeration. 
+	Este objeto Adaptador utiliza composición para mantener una referencia a los datos del Vector (o al propio Vector). 
+	Cuando el cliente llama a métodos como hasMoreElements(), el Adaptador utiliza la información que posee del Vector para responder, adaptando así la interfaz de Vector a la interfaz Enumeration.
+
+Tipo de Implementación del Patrón:
+	Se utiliza el Adaptador de Objetos. El objeto Adaptador (el que implementa Enumeration) mantiene una referencia al objeto Vector (o a su estructura de datos interna) mediante composición para llevar a cabo su trabajo.
+	
+5. 
+En este escenario, el patrón de diseño principal es el Iterador (Iterator), cuyo propósito es proporcionar un modo de acceder secuencialmente a los elementos de un agregado sin exponer su representación interna. 
+El método iterator() es un método de fabricación (Factory Method) que conecta la jerarquía del Agregado (la colección) con la jerarquía del Iterador.
+
+Roles de los participantes (Patrón Iterador):
+	• Agregado Concreto: La clase que contiene los elementos y define la interfaz para crear un Iterador: ArrayList.
+	• Iterador (Target/Interfaz): La interfaz que define el recorrido y acceso a los elementos: Iterator.
+	• Iterador Concreto (Adapter/Implementación): El objeto devuelto por el método iterator() que implementa la interfaz Iterator y mantiene la posición actual en el recorrido del ArrayList.
+
+Ejemplo de funcionamiento (Uso de Iterator):
+El cliente utiliza el método de fabricación iterator() de ArrayList para obtener una instancia del Iterator sin tener que conocer la representación interna de ArrayList.
+
+// Suponemos que la lista 'empleados' es una instancia de ArrayList<String>
+ArrayList<String> empleados = new ArrayList<>();
+empleados.add("Alicia");
+empleados.add("Bernardo");
+
+Obtener el Iterador
+//ArrayList actúa como Agregado Concreto
+Iterator<String> i = empleados.iterator(); 
+
+Recorrer la colección 
+while (i.hasNext()) { // Simula HaTerminado() y Siguiente() implícitamente
+    String empleado = i.next(); // Simula ElementoActual()
+    System.out.println(empleado);
+}
+
+El objeto Iterador es responsable de saber cuál es el elemento actual y qué elementos ya han sido recorridos.
+
+6.
+Para implementar un Adaptador de Iterator (Adaptable) a Enumeration (Objetivo), utilizaremos el Adaptador de Objetos, ya que permite que el adaptador trabaje con la interfaz del Adaptable a través de composición.
+
+Implementación del Adaptador:
+
+El Adaptador: implementa la interfaz Objetivo (Enumeration) y contiene una referencia al Adaptable (Iterator)
+public class AdaptadorIteradorAEnumeracion<T> implements Enumeration<T> {
+    
+    // El Adaptable: la instancia de Iterator que estamos adaptando.
+    private Iterator<T> iterador; 
+
+    // Constructor que recibe el Adaptable (Iterator)
+    public AdaptadorIteradorAEnumeracion(Iterator<T> iterador) {
+        this.iterador = iterador;
+    }
+
+    // Adaptación del método hasMoreElements() (de Enumeration) al método hasNext() (de Iterator)
+    @Override
+    public boolean hasMoreElements() {
+        return iterador.hasNext();
+    }
+
+    // Adaptación del método nextElement() (de Enumeration) al método next() (de Iterator)
+    @Override
+    public T nextElement() {
+        return iterador.next();
+    }
+
+    // Roles:
+    // Objetivo (Target): Enumeration
+    // Adaptable (Adaptee): Iterator
+    // Adaptador (Adapter): AdaptadorIteradorAEnumeracion
+}
+
+
+Código que utiliza la implementación adaptando un ArrayList:
+public class UsoDelAdaptador {
+
+    public static void main(String[] args) {
+        // 1. Creación de una colección (Agregado Concreto)
+        List<String> listaDeNombres = new ArrayList<>();
+        listaDeNombres.add("Carlos");
+        listaDeNombres.add("Diana");
+        listaDeNombres.add("Elena");
+
+        // 2. Obtener el Iterator (El Adaptable) del ArrayList
+        Iterator<String> iteradorArrayList = listaDeNombres.iterator(); 
+
+        // 3. Crear el Adaptador, pasando el Adaptable
+        Enumeration<String> enumeracionAdaptada = 
+            new AdaptadorIteradorAEnumeracion<>(iteradorArrayList);
+
+        // 4. Usar el Adaptador como si fuera un Enumeration (Target)
+        System.out.println("Recorriendo la lista usando Enumeration adaptado:");
+        while (enumeracionAdaptada.hasMoreElements()) {
+            System.out.println(enumeracionAdaptada.nextElement());
+        }
+    }
+}

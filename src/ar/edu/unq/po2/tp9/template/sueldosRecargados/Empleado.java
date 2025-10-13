@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tp8.template.sueldosRecargados;
+package ar.edu.unq.po2.tp9.template.sueldosRecargados;
 
 public abstract class Empleado {
 	public abstract double sueldo();

@@ -1,4 +1,4 @@
-package ar.edu.unq.po2.tp8.template.ayudandoAlSoberano;
+package ar.edu.unq.po2.tp9.template.ayudandoAlSoberano;
 
 import java.util.ArrayList;
 import java.util.List;
