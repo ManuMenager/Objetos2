@@ -1,0 +1,6 @@
+Clase Abstracta 	   -> Cuenta Bancaria.
+Clases Concretas 	   -> CuentaCorriente y CajaDeAhorro.
+Template Method  	   -> Extraer().
+Operaciones Primitivas -> condicionExtraer().
+Operaciones Concretas  -> getTitular(), getSaldo(), setSaldo(), agregarMovimientos().
+Hook Method 		   -> No hay.
