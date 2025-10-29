@@ -1,0 +1,67 @@
+Ejercicio 0 - Diferentes alternativas de Observer
+
+complexObserver:
+Ventajas:
+ - Modernidad: no usa Observable/Observer, sino un listener pattern moderno y seguro.
+ - Tipado fuerte: los métodos del listener indican exactamente qué cambió (sin strings).
+ - Escalabilidad: cada evento tiene su propio método → más limpio y mantenible.
+ - Desacople controlado: el observador no necesita heredar ni depender de clases del framework.
+ 
+Desventajas:
+ - Más código inicial: hay que definir una interfaz con muchos métodos.
+ - Requiere registro manual de listeners: no hay manejo automático de listas o sincronización (como Observable hacía internamente).
+ - Puede crecer demasiado: si el sensor tiene muchos aspectos distintos, la interfaz se vuelve grande.
+
+Extensión para múltiples sensores
+Muy simple: basta con registrar el mismo listener en varios sensores, y en los callbacks distinguir el origen:
+	@Override
+	public void temperaturaInteriorModificada(ComplexSensor sensor, int nuevoValor) {
+	    if (sensor == sensorOficina) {
+	        System.out.println("Temperatura oficina: " + nuevoValor);
+	    } else if (sensor == sensorDeposito) {
+	        System.out.println("Temperatura depósito: " + nuevoValor);
+	    }
+	}
+
+
+complexWithListener:
+Ventajas:
+ - Más granularidad: el parámetro arg permite saber qué aspecto cambió ("TemperaturaInterior", "Humedad", etc.).
+ - Menor tráfico de notificaciones: los observadores pueden reaccionar solo ante cambios relevantes.
+ 
+Desventajas:
+ - Dependencia en cadenas de texto: el "aspecto" puede causar errores si se escribe mal (sin constantes o enum).
+ - Acoplamiento indirecto: el observador depende de los nombres exactos de atributos.
+
+Extensión para múltiples sensores
+El parámetro Observable 'o' del método update te da el sensor que generó el evento, así que se puede usar para distinguir entre varios sensores:
+	@Override
+	public void update(Observable o, Object arg) {
+	    ComplexSensor sensor = (ComplexSensor) o;
+	    String aspecto = (String) arg;
+	
+	    if (aspecto.equalsIgnoreCase("TemperaturaInterior")) {
+	        System.out.println("Cambio en " + sensor + " -> TemperaturaInterior");
+	        this.verificarContexto(sensor.getTemperaturaInterior());
+	    }
+	}
+
+
+simpleObserver:
+Ventajas:
+ - Simplicidad: muy directo, fácil de entender e implementar.
+ - Menor acoplamiento: el observador no necesita conocer detalles del sensor (solo se registra y reacciona).
+ - Rápido de implementar: útil para casos de un único tipo de evento.
+
+Desventajas:
+ - Falta de contexto: el método update(Observable o, Object arg) no indica qué cambió. → Hay que asumir que fue la temperatura (no hay distinción entre atributos).
+ - Poco flexible: si mañana el sensor también midiera humedad, habría que reescribir el código.
+
+Extensión para múltiples sensores
+Cuando una misma clase observe más de un sensor, el problema es saber cuál sensor notificó.
+	@Override
+	public void update(Observable o, Object arg) {
+	    Sensor sensor = (Sensor) o; // Saber quién notificó
+	    System.out.println("Cambio proveniente de sensor: " + sensor);
+	    this.verificarSituacion(sensor.getTemperatura());
+	}
